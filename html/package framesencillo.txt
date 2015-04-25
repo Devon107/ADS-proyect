@@ -1,0 +1,146 @@
+package framesencillo;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowAdapter;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+
+/**
+ *
+ * @author Abinadi
+ */
+public class Conversor extends javax.swing.JFrame {
+
+    private JLabel Cels;
+    private JTextField Cel;
+    private JLabel Far;
+    private JTextField Fars;
+    private JButton Aceptar;
+
+    /**
+     * Creates new form Conversor
+     */
+    public Conversor() {
+        setSize(300, 200);
+        setTitle("Conversion de Temperaturas");
+        initComponents();
+    }
+
+    private void initComponents() {
+        Cels = new JLabel();
+        Cel = new JTextField();
+        Far = new JLabel();
+        Fars = new JTextField();
+
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent evt) {
+                exitForm(evt);
+            }
+
+            public void windowOpened(WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+        getContentPane().setLayout(null);
+
+        this.Cels.setText("Centigrados");
+        getContentPane().add(this.Cels);
+        this.Cels.setBounds(12, 28, 116, 14);
+
+        getContentPane().add(this.Cels);
+        this.Cel.setBounds(132, 28, 144, 20);
+
+        this.Far.setText("Farenheit");
+        getContentPane().add(this.Far);
+        this.Far.setBounds(12, 68, 104, 24);
+
+        this.Fars.setHorizontalAlignment(JTextField.RIGHT);
+        getContentPane().add(this.Fars);
+        this.Fars.setBounds(132, 72, 144, 20);
+
+        this.Aceptar.setMnemonic('A');
+        this.Aceptar.setText("Convertir");
+        getRootPane().add(this.Far);
+        this.Aceptar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                AceptarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(this.Aceptar);
+        this.Aceptar.setBounds(132, 120, 144, 24);
+    }
+
+    private void AceptarActionPerformed(ActionEvent evt) {
+        try {
+            double grados;
+
+            if (this.Cel.getText().equals("") && this.Fars.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Ambos campos estan vacios");
+
+            } else if (this.Cel.getText().equals("") && this.Fars.getText() != "") {
+                grados = (Double.parseDouble(this.Cel.getText()) - 32) * 5 / 9;
+                String texto = String.format("%.2f", grados);
+                this.Cel.setText(texto);
+            } else if (this.Fars.getText().equals("") && this.Cel.getText() != "") {
+                grados = Double.parseDouble(this.Cel.getText()) * 9 / 5 + 32;
+                String texto = String.format("%.2f", grados);
+                this.Fars.setText(texto);
+            } else {
+                JOptionPane.showMessageDialog(null, "Solo un campo debe usar");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+
+        }
+    }
+
+    private void exitForm(WindowEvent evt) {
+        System.exit(0);
+    }
+
+    private void formWindowOpened(WindowEvent evt) {
+        this.Cel.requestFocus();
+    }
+
+    
+                            
+
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Conversor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Conversor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Conversor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Conversor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            System.out.println("No sepuede establecer el aspecto deseado: " + e);
+        }
+        new Conversor().setVisible(true);
+    }
+
+    // Variables declaration - do not modify                     
+    // End of variables declaration                   
+}
