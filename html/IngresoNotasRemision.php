@@ -1,14 +1,4 @@
-
-<!doctype html>
-<html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NYMSA | Notas de Remision</title>	
-    <link rel="stylesheet" href="../css/foundation.css" />
-    <script src="js/vendor/modernizr.js"></script>
-  <script src="../js/shortcut.js" type="text/javascript"></script>
-  <?php
+<?php
     $numid="";
     $art="";
     $nom="";
@@ -17,47 +7,14 @@
     $pre="";
     $fec="";
     include("man_nota_remision.php");
+    $titulo = "Promociones";
     include ('../html/base/header.php'); 
   ?>
   </head>
   <body>
-
-  
-
- 
-  
- <a name="Top">
-   <div class="row">
-    <div class="large-12 columns">
-      <div class="panel">
-        <center><h1>Notas de Remisión</h1></center>
-      </div>
-    </div>
-  </div>
-  
-  <div class="row">
-    <div class="large-3 columns">
-      <h1><img src="../img/logo.png"/></h1>
-    </div>
-    <div class="large-9 columns">
-      <ul class="inline-list right">
-        <li><a href="#">Home</a></li>
-        <li><a href="#Top">Desplazar hacia arriba</a></li>
-		<li><a href="#primernombre">Desplazar el centro</a></li>
-        <li><a href="#Bot">Desplazar hacia abajo</a></li>
-
-      </ul>
-    </div>
-  </div>
-  
-   
-  
   
   <div class="row">    
-    
-     
-     
-    <div class="large-9 push-3 columns">
+   <div class="large-9 push-3 columns">
       <form action="IngresoNotasRemision.php" method="post"> <!-- line -->
   <table width="720" border="1" align="left" style="border-collapse:collapse">
       <tr>
@@ -81,7 +38,7 @@
   <tr>
       <td width="242">DUI:</td>
       <td width="253"><label for="dui"></label>
-      <input placeholder="45612345-2" value="<?php echo $dui; ?>" type="text" name="dui" id="dui"  required /></td>
+      <input placeholder="45612345-2" value="<?php echo $dui; ?>" type="text" name="dui" id="dui" onkeyup="mascara(this,'-',sep3,true)" required maxlenght="10"/></td>
 	  
     </tr>
     <tr>
@@ -137,30 +94,10 @@
     </div>
     
   </div>
-    
-  
-   
-  
-  <footer class="row">
-    <div class="large-12 columns">
-      <hr/>
-      <div class="row">
-        <div class="large-6 columns">
-          <p>© Copyright Negocios y Mas S.A. de C.V.</p>
-        </div>
-        <div class="large-6 columns">
-          <ul class="inline-list right">
-        <li><a href="#">Home</a></li>
-        <li><a href="#Top">Desplazar hacia arriba</a></li>
-		<li><a href="#primernombre">Desplazar hacia el centro</a></li>
-
-          </ul>
-        </div>
-      </div>
-    </div> 
-  </footer>
-   
-    <a name="Bot">
-    
+    <?php
+    include ('../html/base/footer.php')
+    ?>
   </body>
 </html>
+
+
