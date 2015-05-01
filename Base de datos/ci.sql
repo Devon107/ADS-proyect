@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-03-2015 a las 05:09:38
+-- Tiempo de generación: 01-05-2015 a las 22:20:15
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `ci`
 --
-CREATE DATABASE IF NOT EXISTS `ci` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `ci`;
 
 -- --------------------------------------------------------
 
@@ -61,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `bodega` (
   `nombre` varchar(30) NOT NULL,
   PRIMARY KEY (`idBodega`),
   KEY `fk_sucursal_bodega` (`idSucursal`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `bodega`
@@ -72,8 +70,7 @@ INSERT INTO `bodega` (`idBodega`, `idSucursal`, `nombre`) VALUES
 (2, 4, 'dos'),
 (3, 3, 'tres'),
 (4, 5, 'cuatro'),
-(5, 2, 'cinco'),
-(6, 8, 'Bodega8');
+(5, 2, 'cinco');
 
 -- --------------------------------------------------------
 
@@ -89,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `catalogo` (
   `fechaCierre` date NOT NULL,
   `imagen` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`idcatalogo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `catalogo`
@@ -100,8 +97,7 @@ INSERT INTO `catalogo` (`idcatalogo`, `nombre`, `descripcion`, `fechaInicio`, `f
 (2, 'catalogo2', 'es el segundo catalogo', '2004-05-21', '2004-08-21', 'image2'),
 (3, 'catalogo3', 'es el tercer catalogo', '2005-05-21', '2005-08-21', 'image3'),
 (4, 'catalogo4', 'es el cuarto catalogo', '2006-05-21', '2006-08-21', 'image4'),
-(5, 'catalogo5', 'es el quinto catalogo', '2006-05-21', '2006-08-21', 'image5'),
-(6, 'Catalogo10', 'Este es un catalogo', '2014-11-19', '2014-11-29', 'Rostro');
+(5, 'catalogo5', 'es el quinto catalogo', '2006-05-21', '2006-08-21', 'image5');
 
 -- --------------------------------------------------------
 
@@ -119,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `estado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idCliente`),
   KEY `fk_persona_cliente` (`idPersona`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -130,8 +126,7 @@ INSERT INTO `cliente` (`idCliente`, `idPersona`, `CreditoFiscal`, `FechaAlta`, `
 (2, 2, '136588-2', '2011-04-04', '2012-07-01', 1, 1),
 (3, 3, '114745-0', '2010-02-22', '2011-05-25', 1, 0),
 (4, 4, '171854-2', '2011-11-11', '2012-11-18', 1, 1),
-(5, 5, '145588-3', '2009-08-17', '2010-12-20', 1, 1),
-(6, 1, '1500', '2014-11-05', '2014-11-28', 0, 1);
+(5, 5, '145588-3', '2009-08-17', '2010-12-20', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -140,15 +135,13 @@ INSERT INTO `cliente` (`idCliente`, `idPersona`, `CreditoFiscal`, `FechaAlta`, `
 --
 
 CREATE TABLE IF NOT EXISTS `cobro` (
-  `idCobro` int(11) NOT NULL AUTO_INCREMENT,
-  `idPersona` int(11) NOT NULL,
-  `Monto` double NOT NULL,
-  `Fecha` date NOT NULL,
-  `Telefono` varchar(20) NOT NULL,
-  `Estado` tinyint(1) NOT NULL,
-  PRIMARY KEY (`idCobro`),
-  KEY `fk_persona_cobro` (`idPersona`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+  `idCobro` int(11) DEFAULT NULL,
+  `idPersona` int(11) DEFAULT NULL,
+  `Monto` double DEFAULT NULL,
+  `Fecha` date DEFAULT NULL,
+  `Telefono` varchar(60) DEFAULT NULL,
+  `Estado` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `cobro`
@@ -157,10 +150,10 @@ CREATE TABLE IF NOT EXISTS `cobro` (
 INSERT INTO `cobro` (`idCobro`, `idPersona`, `Monto`, `Fecha`, `Telefono`, `Estado`) VALUES
 (1, 1, 100, '2003-05-21', '22205662', 1),
 (2, 2, 200, '2013-05-21', '22205663', 0),
-(3, 3, 300, '2014-05-21', '22205664', 1),
-(4, 4, 400, '2015-03-21', '22205665', 0),
+(3, 3, 30.5, '2014-05-21', '22205664', 1),
+(4, 3, 12.5, '2015-04-09', '2121-2121', 1),
 (5, 1, 12.51, '2015-03-14', '2115-4566', 1),
-(6, 3, 45645, '2015-03-20', '2252-5465', 0),
+(6, 3, 30, '2015-03-20', '2252-5465', 0),
 (7, 1, 2.55, '2015-03-13', '7854-6556', 0),
 (8, 1, 12.55, '2015-03-13', '2212-1212', 0),
 (9, 1, 21.25, '2015-03-13', '2123-1231', 0),
@@ -168,8 +161,12 @@ INSERT INTO `cobro` (`idCobro`, `idPersona`, `Monto`, `Fecha`, `Telefono`, `Esta
 (11, 1, 23.25, '2015-03-20', '2536-5646', 0),
 (12, 2, 23.25, '2015-03-20', '7894-5656', 0),
 (13, 4, 12.56, '2015-03-13', '7489-4564', 0),
-(14, 5, 1223, '2015-03-10', '4545-4564', 1),
-(15, 3, 45, '2015-03-13', '2561-5165', 1);
+(14, 5, 12, '2015-07-10', '4545-4564', 1),
+(15, 3, 45, '2015-03-13', '2561-5165', 1),
+(16, 4, 15, '2015-06-13', '2561-5166', 1),
+(17, 5, 30.51, '2015-04-30', '2654-5642', 1),
+(18, 2, 12.5, '2015-04-11', '2212-1212', 1),
+(19, 1, 12, '2015-04-11', '2545-4654', 1);
 
 -- --------------------------------------------------------
 
@@ -182,19 +179,18 @@ CREATE TABLE IF NOT EXISTS `color` (
   `nombre` varchar(30) DEFAULT NULL,
   `codigo` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`idcolor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `color`
 --
 
 INSERT INTO `color` (`idcolor`, `nombre`, `codigo`) VALUES
-(1, 'Azul', '#400040'),
-(2, 'Blanco', '#ff0000'),
-(3, 'Celeste', '#800040'),
-(4, 'Morado', '#80ff80'),
-(5, 'Rojo', '#ff8040'),
-(6, 'Verde Claro', '#00ff80');
+(1, 'Azul', '#000888'),
+(2, 'Blanco', '#FFFFFF'),
+(3, 'Celeste', '#01DFD7'),
+(4, 'Morado', '#8904B1'),
+(5, 'Rojo', '#FF0000');
 
 -- --------------------------------------------------------
 
@@ -215,17 +211,14 @@ CREATE TABLE IF NOT EXISTS `consignacion` (
   `valor` double NOT NULL,
   `pay` varchar(45) NOT NULL,
   PRIMARY KEY (`IDConsignaciones`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `consignacion`
 --
 
 INSERT INTO `consignacion` (`IDConsignaciones`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`, `SegundoApellido`, `Referencia`, `Telefono`, `direccion`, `Concepto`, `valor`, `pay`) VALUES
-(4, 'Nombre', '', 'Apellido', '', 'referencia!', '12345', 'direccion!', 'concepto!', 23.34, 'efectivo'),
-(5, 'Roberto', 'Antonio', 'Flores', 'Ayala', 'Pedro Artura Sanchez', '7777-7777', 'Calle las perlitas', 'Deuda', 12.22, 'Tarjeta'),
-(6, 'Cesar', '', 'Iglesias', '', 'Kevin Ascencio', '2222-2222', 'Urbanizacion las palameras', 'Prestamo', 15.12, 'Efectivo'),
-(7, 'jose', 'flores', 'FLO', 'sdjfasl', 'hola lhola', '2222-2222', 'ahkLS KHas dkahsdk HSDA', 'PRESTAMO', 12, 'Tarjeta');
+(1, 'asdfasfadg', 'jojo', 'jojojojj', 'aosdfaslkjkh', 'jaja jaja', '4444-4444', 'calle', 'preatamo', 14, 'Efectivo');
 
 -- --------------------------------------------------------
 
@@ -278,7 +271,7 @@ INSERT INTO `departamento` (`idDepartamento`, `idPais`, `Nombre`) VALUES
 (5, 1, 'La Union'),
 (6, 1, 'Santa Ana'),
 (7, 1, 'La Paz'),
-(8, 1, 'Cabañas'),
+(8, 1, 'Caba?as'),
 (9, 1, 'Libertad'),
 (10, 1, 'Chalatenango'),
 (11, 1, 'Usulutan'),
@@ -300,18 +293,7 @@ CREATE TABLE IF NOT EXISTS `detalleordendecompra` (
   PRIMARY KEY (`idDetalleOrdenDeCompra`),
   KEY `FK_producto_talla_DetalleOrdenCompra` (`idproducto_talla`),
   KEY `FK_OrdenDeCompra` (`idOrdenDeCompra`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Volcado de datos para la tabla `detalleordendecompra`
---
-
-INSERT INTO `detalleordendecompra` (`idDetalleOrdenDeCompra`, `idproducto_talla`, `idOrdenDeCompra`, `cantidad`) VALUES
-(1, 1, 2, 15),
-(2, 2, 3, 18),
-(3, 1, 3, 12),
-(4, 4, 3, 11),
-(5, 2, 2, 21);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -356,53 +338,42 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `estado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idEmpleado`),
   KEY `fk_persona_empleado` (`idPersona`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `empleado`
 --
 
 INSERT INTO `empleado` (`idEmpleado`, `idPersona`, `usuario`, `cargo`, `salario`, `clave`, `estado`) VALUES
-(1, 1, 'Administrador1', 'Administrador', 1000.00, 'e10adc3949ba59abbe56e057f20f883e', 0),
-(2, 2, 'Administrador2', 'Gerente', 1200.00, 'e10adc3949ba59abbe56e057f20f883e', 0),
-(3, 3, 'Administrador3', 'Vendedor', 1000.00, 'e10adc3949ba59abbe56e057f20f883e', 1),
-(4, 4, 'Administrador4', 'Jefe', 1200.00, 'e10adc3949ba59abbe56e057f20f883e', 1),
-(5, 5, 'Administrador5', 'Auxiliar', 1000.00, 'e10adc3949ba59abbe56e057f20f883e', 0),
-(6, 6, 'emprf87', 'Vendedor', 500.00, '83422503bcfc01d303030e8a7cc80efc', 0);
+(1, 1, 'Administrador1', 'Administrador', 1000.00, '7815696ecbf1c96e6894b779456d330e', 0),
+(2, 2, 'Administrador2', 'adm2', 1200.00, 'e10adc3949ba59abbe56e057f20f883e', 0),
+(3, 3, 'Administrador3', 'adm3', 1000.00, 'e10adc3949ba59abbe56e057f20f883e', 1),
+(4, 4, 'Administrador4', 'adm4', 1200.00, 'e10adc3949ba59abbe56e057f20f883e', 1),
+(5, 5, 'Administrador5', 'adm5', 1000.00, 'e10adc3949ba59abbe56e057f20f883e', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `factura`
+-- Estructura de tabla para la tabla `historial`
 --
 
-CREATE TABLE IF NOT EXISTS `factura` (
-  `id_factura` int(11) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  `id_persona` int(11) NOT NULL,
-  `id_linea` int(11) NOT NULL,
-  `id_estilo` int(11) NOT NULL,
-  `id_color` int(11) NOT NULL,
-  `id_talla` int(11) NOT NULL,
-  `monto` float NOT NULL,
-  `fecha` date NOT NULL,
-  PRIMARY KEY (`id_factura`),
-  KEY `fk_factura_id_cliente` (`id_cliente`),
-  KEY `fk_factura_persona` (`id_persona`),
-  KEY `fk_factura_linea` (`id_linea`),
-  KEY `fk_factura_estilo` (`id_estilo`),
-  KEY `fk_factura_color` (`id_color`),
-  KEY `fk_factura_talla` (`id_talla`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `historial` (
+  `idhistorial` int(11) NOT NULL AUTO_INCREMENT,
+  `fechapago` date NOT NULL,
+  `monto` double(10,2) NOT NULL,
+  `telefono` int(11) NOT NULL,
+  `nombre` varchar(140) NOT NULL,
+  PRIMARY KEY (`idhistorial`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Volcado de datos para la tabla `factura`
+-- Volcado de datos para la tabla `historial`
 --
 
-INSERT INTO `factura` (`id_factura`, `id_cliente`, `id_persona`, `id_linea`, `id_estilo`, `id_color`, `id_talla`, `monto`, `fecha`) VALUES
-(1, 1, 1, 1, 1, 3, 2, 15, '2015-03-11'),
-(2, 3, 3, 3, 4, 5, 4, 50, '2015-03-11'),
-(3, 6, 6, 5, 5, 3, 4, 33, '2015-03-19');
+INSERT INTO `historial` (`idhistorial`, `fechapago`, `monto`, `telefono`, `nombre`) VALUES
+(1, '2015-04-02', 25.00, 23245462, 'Carlos Perez'),
+(2, '2015-04-01', 34.00, 22223333, 'Kevin Canales'),
+(3, '2015-04-11', 34.90, 22343345, 'Elmer Cruz');
 
 -- --------------------------------------------------------
 
@@ -415,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `linea` (
   `nombre` varchar(30) NOT NULL,
   `descripcion` varchar(200) NOT NULL,
   PRIMARY KEY (`idlinea`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `linea`
@@ -426,8 +397,7 @@ INSERT INTO `linea` (`idlinea`, `nombre`, `descripcion`) VALUES
 (2, 'linea2', 'linea numero 2'),
 (3, 'linea3', 'linea numero 3'),
 (4, 'linea4', 'linea numero 4'),
-(5, 'linea5', 'linea numero 5'),
-(6, 'Deportivos', 'Esta es una subdivision de deportivos');
+(5, 'linea5', 'linea numero 5');
 
 -- --------------------------------------------------------
 
@@ -440,7 +410,7 @@ CREATE TABLE IF NOT EXISTS `marca` (
   `nombre` varchar(30) NOT NULL,
   `descripcion` varchar(200) NOT NULL,
   PRIMARY KEY (`idMarca`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `marca`
@@ -451,8 +421,7 @@ INSERT INTO `marca` (`idMarca`, `nombre`, `descripcion`) VALUES
 (2, 'CAT', 'Marca 2'),
 (3, 'PUMA', 'Marca 3'),
 (4, 'HEATHERLAND', 'Marca 4'),
-(5, 'FILA', 'Marca 5'),
-(6, 'Logitech', 'Esta es una marca informatica');
+(5, 'FILA', 'Marca 5');
 
 -- --------------------------------------------------------
 
@@ -508,7 +477,33 @@ CREATE TABLE IF NOT EXISTS `nota_remision` (
 --
 
 INSERT INTO `nota_remision` (`id`, `numero`, `articulo`, `nombre`, `dui`, `cantidad`, `precio`, `fecha`) VALUES
-(1, 0, '324213423', 'mauricio flores', '4', 1, 4.48, '2015-04-04');
+(1, NULL, 'A52', 'Pedro Joven', '4561237-9', 12, 40.5, '2015-04-01');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ofertas`
+--
+
+CREATE TABLE IF NOT EXISTS `ofertas` (
+  `idoferta` int(11) NOT NULL AUTO_INCREMENT,
+  `precioventa` double(10,2) DEFAULT NULL,
+  `producto` varchar(45) DEFAULT NULL,
+  `disponible` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idoferta`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `ofertas`
+--
+
+INSERT INTO `ofertas` (`idoferta`, `precioventa`, `producto`, `disponible`) VALUES
+(1, 25.50, 'Zapatilla', 37),
+(2, 39.99, 'Bota', 18),
+(3, 22.00, 'Tenis', 25),
+(4, 5.89, 'nombreb', 1),
+(5, 54.15, 'nombrea', 1),
+(6, 5.00, 'nombrea', 14);
 
 -- --------------------------------------------------------
 
@@ -590,6 +585,32 @@ INSERT INTO `pais` (`idPais`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pendiente`
+--
+
+CREATE TABLE IF NOT EXISTS `pendiente` (
+  `idpendiente` int(11) NOT NULL AUTO_INCREMENT,
+  `gerente` varchar(140) NOT NULL,
+  `zona` varchar(140) NOT NULL,
+  `departamento` varchar(140) NOT NULL,
+  `municipio` varchar(140) NOT NULL,
+  `cliente` varchar(140) NOT NULL,
+  PRIMARY KEY (`idpendiente`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT=':v' AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `pendiente`
+--
+
+INSERT INTO `pendiente` (`idpendiente`, `gerente`, `zona`, `departamento`, `municipio`, `cliente`) VALUES
+(1, 'Ger', 'Zon', 'Dep', 'Mun', 'Clie'),
+(2, 'Ger 2', 'Zon 2', 'Dep 2', 'Muun', 'Cliee'),
+(3, 'Gerr', 'Zoon', 'Deep', 'Muun', 'Clie'),
+(4, 'Geer 2', 'Zoon 2', 'Deep 2', 'Muuun', 'Cliiee');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `persona`
 --
 
@@ -609,7 +630,7 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `estado` tinyint(1) NOT NULL,
   PRIMARY KEY (`idPersona`),
   KEY `fk_municipio_persona` (`idMunicipio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `persona`
@@ -617,11 +638,10 @@ CREATE TABLE IF NOT EXISTS `persona` (
 
 INSERT INTO `persona` (`idPersona`, `Primer_Nombre`, `Segundo_Nombre`, `Primer_Apellido`, `Segundo_Apellido`, `Direccion`, `DUI`, `NIT`, `genero`, `estadoCivil`, `FechaNacimiento`, `idMunicipio`, `estado`) VALUES
 (1, 'Roberto', 'Antonio', 'Flores', 'Ayala', 'Canton El cojutillo, calle el amate #123', '02487847-2', '0215-55671-3524-1', 1, 1, '1992-02-01', 1, 1),
-(2, 'Cesar', 'Ernesto', 'Iglesias', 'Cuellar', 'Canton El juancho, calle el amate #124', '02487848-3', '0215-55671-3255-1', 1, 1, '1993-02-01', 1, 1),
-(3, 'Morfeo', 'Orfeo', 'Trinity', 'War', 'Canton El juancho, calle el amate #124', '02487848-4', '0215-55671-3552-1', 1, 1, '1993-02-02', 1, 1),
-(4, 'Herson', 'Ernesto', 'Serrano', 'Asencio', 'Canton El juancho, calle el amate #124', '02487848-5', '0215-55671-3535-1', 1, 1, '1994-02-01', 1, 0),
-(5, 'Juan', 'Pedro', 'San', 'Java', 'Canton El manguito, calle el amate #123', '12487847-6', '0216-55671-3354-1', 1, 1, '1989-02-01', 1, 0),
-(6, 'Roberto', 'Carlos', 'Flores', 'Ascencio', 'Calle 15 de septiembre', '12345678-9', '1234-567891-233-3', 1, 1, '2014-11-20', 1, 1);
+(2, 'Cesar', 'Ernesto', 'Iglesias', 'Cuellar', 'Canton El juancho, calle el amate #124', '02487848-2', '0215-55671-3255-1', 1, 1, '1993-02-01', 1, 1),
+(3, 'Morfeo', 'Orfeo', 'Trinity', 'War', 'Canton El juancho, calle el amate #124', '02487848-2', '0215-55671-3552-1', 1, 1, '1993-02-02', 1, 1),
+(4, 'Herson', 'Ernesto', 'Serrano', 'Asencio', 'Canton El juancho, calle el amate #124', '02487848-2', '0215-55671-3535-1', 1, 1, '1994-02-01', 1, 0),
+(5, 'Juan', 'Pedro', 'San', 'Java', 'Canton El manguito, calle el amate #123', '12487847-2', '0216-55671-3354-1', 1, 1, '1989-02-01', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -656,18 +676,13 @@ INSERT INTO `persona_contacto` (`idPersona_Contacto`, `idPersona`, `idContacto`)
 --
 
 CREATE TABLE IF NOT EXISTS `porteria_ce` (
-  `id_cambio` int(11) NOT NULL AUTO_INCREMENT,
-  `factura_in` int(11) NOT NULL,
-  `producto_in` int(11) NOT NULL,
-  `id_color` int(11) NOT NULL,
-  `id_talla` int(11) NOT NULL,
-  `fecha` date NOT NULL,
-  PRIMARY KEY (`id_cambio`),
-  KEY `fk_factura_factura_in` (`factura_in`),
-  KEY `fk_factura_producto_in` (`producto_in`),
-  KEY `fk_factura_id_color` (`id_color`),
-  KEY `fk_factura_id_talla` (`id_talla`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+  `id_cambio` int(11) DEFAULT NULL,
+  `factura_in` int(11) DEFAULT NULL,
+  `producto_in` int(11) DEFAULT NULL,
+  `id_color` int(11) DEFAULT NULL,
+  `id_talla` int(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `porteria_ce`
@@ -686,7 +701,60 @@ INSERT INTO `porteria_ce` (`id_cambio`, `factura_in`, `producto_in`, `id_color`,
 (34, 1, 1, 1, 1, '2015-03-13'),
 (35, 1, 1, 1, 1, '2015-03-13'),
 (36, 1, 1, 1, 1, '2015-03-13'),
-(37, 27, 2, 3, 2, '2015-03-13');
+(37, 27, 2, 3, 2, '2015-03-13'),
+(NULL, 1, 1, 3, 1, '2015-04-23');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `porteria_ci`
+--
+
+CREATE TABLE IF NOT EXISTS `porteria_ci` (
+  `id_cambio` int(11) NOT NULL AUTO_INCREMENT,
+  `factura_in` int(11) NOT NULL,
+  `producto_in` int(11) NOT NULL,
+  `id_color` int(11) NOT NULL,
+  `id_talla` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  PRIMARY KEY (`id_cambio`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `porteria_ci`
+--
+
+INSERT INTO `porteria_ci` (`id_cambio`, `factura_in`, `producto_in`, `id_color`, `id_talla`, `fecha`) VALUES
+(1, 1, 1, 1, 1, '2015-04-08'),
+(2, 1, 1, 4, 1, '2015-04-23');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `premios`
+--
+
+CREATE TABLE IF NOT EXISTS `premios` (
+  `idpremios` int(11) NOT NULL AUTO_INCREMENT,
+  `afiliado` varchar(50) NOT NULL,
+  `monto` decimal(10,2) NOT NULL,
+  `premio` double(10,2) NOT NULL,
+  `rango` varchar(50) NOT NULL,
+  `pagos` int(11) NOT NULL,
+  `gerente` varchar(100) NOT NULL,
+  `zona` varchar(100) NOT NULL,
+  `cliente` varchar(100) NOT NULL,
+  PRIMARY KEY (`idpremios`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='lawea' AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `premios`
+--
+
+INSERT INTO `premios` (`idpremios`, `afiliado`, `monto`, `premio`, `rango`, `pagos`, `gerente`, `zona`, `cliente`) VALUES
+(1, 'Afiliado', '250.00', 5.00, 'A', 0, 'Gerente 1', 'Zona 1', 'Cliente 1'),
+(2, 'Afiliado 2', '300.00', 10.00, 'B', 0, 'Gerente 2', 'Zona 2', 'Cliente 2'),
+(3, 'Afiliado 3', '350.00', 15.00, 'C', 0, 'Gerente 3', 'Zona 3', 'Kliente 3');
 
 -- --------------------------------------------------------
 
@@ -713,19 +781,18 @@ CREATE TABLE IF NOT EXISTS `producto` (
   KEY `FK_proveedor_producto` (`idProveedor`),
   KEY `FK_marca_producto` (`idMarca`),
   KEY `FK_catalogo_producto` (`idCatalogo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `producto`
 --
 
 INSERT INTO `producto` (`estilo`, `nombre`, `idProveedor`, `codigoOrigen`, `linea`, `descripcion`, `idCatalogo`, `nPag`, `idMarca`, `propiedad`, `garantia`, `observacion`, `estado`) VALUES
-(1, 'Zapatilla', 1, '25', 1, 'produto de Fila', 1, '2', 2, 'cuero', 12, 'calidad 1/2', 1),
-(2, 'Tenis', 2, '26', 1, 'produto de Fila', 1, '2', 2, 'cuero', 12, 'calidad 1/2', 1),
-(3, 'Flat', 3, '27', 1, 'produto de Fila', 1, '2', 2, 'cuero', 12, 'calidad 1/2', 0),
-(4, 'Bota', 4, '28', 1, 'produto de Fila', 1, '2', 2, 'cuero', 12, 'calidad 1/2', 1),
-(5, 'Plataforma', 5, '25', 1, 'produto de Fila', 1, '2', 2, 'cuero', 12, 'calidad 1/2', 0),
-(6, 'Formal', 1, '7412900301447', 1, 'Duradero', 1, '5', 1, 'Cuero', 30, 'Defectuoso', 1);
+(1, 'nombrea', 1, '25', 1, 'produto de Fila', 1, '2', 2, 'cuero', 12, 'calidad 1/2', 1),
+(2, 'nombreb', 2, '25', 1, 'produto de Fila', 1, '2', 2, 'cuero', 12, 'calidad 1/2', 1),
+(3, 'nombrec', 3, '25', 1, 'produto de Fila', 1, '2', 2, 'cuero', 12, 'calidad 1/2', 0),
+(4, 'nombred', 4, '25', 1, 'produto de Fila', 1, '2', 2, 'cuero', 12, 'calidad 1/2', 1),
+(5, 'nombree', 5, '25', 1, 'produto de Fila', 1, '2', 2, 'cuero', 12, 'calidad 1/2', 0);
 
 -- --------------------------------------------------------
 
@@ -767,16 +834,15 @@ CREATE TABLE IF NOT EXISTS `promocion` (
   `Producto` varchar(45) NOT NULL,
   `Condicion` varchar(45) NOT NULL,
   PRIMARY KEY (`ID_Promo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `promocion`
 --
 
 INSERT INTO `promocion` (`ID_Promo`, `Fecha_inicio`, `Disponible`, `Descuento`, `Producto`, `Condicion`) VALUES
-(2, '2015-03-12', 1, 5, 'Zapatilla', 'un par'),
-(3, '2015-03-11', 2, 6, 'Bota', 'segundo a mitad'),
-(4, '2015-03-26', 5, 6, 'Tenis', 'contado');
+(1, '2015-04-24', 1, 5, 'nombred', 'contado'),
+(2, '2015-04-22', 9, 7, 'nombrec', 'promo');
 
 -- --------------------------------------------------------
 
@@ -810,6 +876,30 @@ INSERT INTO `proveedor` (`idProveedor`, `nombre`, `registroFiscal`, `telefono`, 
 (3, 'PUMA', '875412-1', '23820215', 'Pedro', 'ayuda tres', 30, 'puma@gmail', 'avenica jerusarel casa 5', '2546-022589-574-0', 1),
 (4, 'HEATHERLAND', '784521-1', '22207896', 'Amilcar', 'llegada cuatro', 30, 'heatherland@gmail', 'colonia san patricio casa 27', '1234-458967-741-3', 1),
 (5, 'FILA', '321456-1', '22707412', 'Leonardo', 'Retirada cinco', 30, 'fila@gmail', 'colonia san ramon pasaje 3 casa 7', '8977-356545-123-2', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recepcion`
+--
+
+CREATE TABLE IF NOT EXISTS `recepcion` (
+  `idrecepcion` int(11) NOT NULL AUTO_INCREMENT,
+  `idproveedor` varchar(50) NOT NULL,
+  `pares` int(11) NOT NULL,
+  `observacion` varchar(500) NOT NULL,
+  PRIMARY KEY (`idrecepcion`),
+  KEY `idproveedor` (`idproveedor`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Volcado de datos para la tabla `recepcion`
+--
+
+INSERT INTO `recepcion` (`idrecepcion`, `idproveedor`, `pares`, `observacion`) VALUES
+(4, 'NIKE', 5, '8'),
+(5, 'FILA', 7, 'zapatos'),
+(6, 'HEATHERLAND', 25, 'dfghj');
 
 -- --------------------------------------------------------
 
@@ -920,6 +1010,32 @@ INSERT INTO `tipocontacto` (`idTipoContacto`, `Nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `ventas`
+--
+
+CREATE TABLE IF NOT EXISTS `ventas` (
+  `idventa` int(11) NOT NULL AUTO_INCREMENT,
+  `gerente` varchar(250) COLLATE utf8_spanish2_ci NOT NULL,
+  `zona` varchar(250) COLLATE utf8_spanish2_ci NOT NULL,
+  `departamento` varchar(140) COLLATE utf8_spanish2_ci NOT NULL,
+  `cliente` varchar(250) COLLATE utf8_spanish2_ci NOT NULL,
+  `dia` date NOT NULL,
+  `metas` double(10,2) NOT NULL,
+  PRIMARY KEY (`idventa`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci COMMENT='ctmwnqliao' AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `ventas`
+--
+
+INSERT INTO `ventas` (`idventa`, `gerente`, `zona`, `departamento`, `cliente`, `dia`, `metas`) VALUES
+(1, 'Gerente 1', 'Zona 1', 'depto 1', 'cliente 1', '2015-04-01', 350.00),
+(2, 'Gerente 2', 'Zona 2', 'depto 2', 'cliente 2', '2015-04-02', 250.00),
+(3, 'A gerente', 'A Zona', 'A dep', 'A clien', '2015-04-03', 100.00);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `zona`
 --
 
@@ -967,12 +1083,6 @@ ALTER TABLE `cliente`
   ADD CONSTRAINT `fk_persona_cliente` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `cobro`
---
-ALTER TABLE `cobro`
-  ADD CONSTRAINT `fk_persona_cobro` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `contacto`
 --
 ALTER TABLE `contacto`
@@ -1003,17 +1113,6 @@ ALTER TABLE `detalleordendeventa`
 --
 ALTER TABLE `empleado`
   ADD CONSTRAINT `fk_persona_empleado` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `factura`
---
-ALTER TABLE `factura`
-  ADD CONSTRAINT `fk_factura_color` FOREIGN KEY (`id_color`) REFERENCES `color` (`idcolor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_factura_estilo` FOREIGN KEY (`id_estilo`) REFERENCES `producto` (`estilo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_factura_id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_factura_linea` FOREIGN KEY (`id_linea`) REFERENCES `linea` (`idlinea`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_factura_persona` FOREIGN KEY (`id_persona`) REFERENCES `persona` (`idPersona`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_factura_talla` FOREIGN KEY (`id_talla`) REFERENCES `talla` (`idtalla`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `municipio`
