@@ -76,28 +76,8 @@
   </table>
   </form> <!-- line -->
     </div>
-    
-    
-     
-     
-    <div class="large-3 pull-9 columns">
-        
-      <ul class="side-nav">
-        <li><a href="#">Home</a></li>
-        <li><a href="#Top">Desplazar hacia arriba</a></li>
-		<li><a href="#primernombre">Desplazar el centro</a></li>
-        <li><a href="#Bot">Desplazar hacia abajo</a></li>
-      </ul>
-      
-      <p><img src="../img/addnymsa2.jpg"/></p>
-        
-    </div>
-    
-  </div>
+
     <?php
     include ('../html/base/footer.php')
     ?>
-  </body>
-</html>
-
 
