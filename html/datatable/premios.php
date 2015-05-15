@@ -86,6 +86,8 @@ $(document).ready(function() {
 	</script>
 </head>
 <body>
+<form action="premiosPDF.php" method="POST">
+	<table><tr><td><div align="center"><input type="submit" class='button' name="button" id="button" value="Generar PDF"/></td></tr></table></form>
 	<div class="container">
 			<div id="demo"></div>
 	</div>

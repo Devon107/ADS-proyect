@@ -34,6 +34,25 @@ $titulo2 = "Notas de remisión"; //Titulo que va a ir en el cuerpo del documento
 		$j++;
 	}
 	$i=0;
+	
+	$consulta2="SELECT IF(nota_remision.estado=1,'Activo','Inactivo') from nota_remision";
+	$resultado2 = mysql_query($consulta2);
+	if (!$resultado2) {
+		echo "No se pudo ejecutar con exito la consulta ($consulta) en la BD: " . mysql_error();
+		exit;
+	}
+	if (mysql_num_rows($resultado1) == 0) {
+		echo "No se han encontrado registros.";
+		exit;
+	}
+	$arrayLength = count($resultado2);
+	$j=0;
+	while($row2 = mysql_fetch_array($resultado2))
+	{
+		$est[$j]=$row2[0];
+		$j++;
+	}
+	
 	  while($row = mysql_fetch_array($resultado))
         {   
             //guardamos en rawdata todos los vectores/filas que nos devuelve la consulta
@@ -42,7 +61,7 @@ $titulo2 = "Notas de remisión"; //Titulo que va a ir en el cuerpo del documento
         
             $rawdata[$i] = $row;
 			$h=$row['link'] ='<a href="../ActualizacionConsignaciones.php?DUI='.$id[$i].'" target="_top" >'."Actualizar".'</a>'; 
-			$g=$row['link2'] ='<a href="../ActualizacionConsignaciones.php?DUI='.$id[$i].'" target="_top" >'."Eliminar".'</a>';
+			$g=$row['link2'] ='<a href="auxiliar_nota.php?ID='.$id[$i].'" target="_top" >'."$est[$i]".'</a>';
             array_push($rawdata[$i], $h);
             array_push($rawdata[$i], $g);				
 			$i++;
@@ -83,13 +102,15 @@ $(document).ready(function() {
 			{ "title": "Cantidad", "class": "center" },
 			{ "title": "Editar", "class": "center" },
 			
-			{ "title": "Eliminar", "class": "center" }
+			{ "title": "Estado", "class": "center" }
 		]
 	} );	
 } );
 	</script>
 </head>
 <body>
+<form action="notaPDF.php" method="POST">
+<table><tr><td><div align="center"><input type="submit" class='button' name="button" id="button" value="Generar PDF"/></td></tr></table></form>
 	<div class="container">
 			<div id="demo"></div>
 	</div>

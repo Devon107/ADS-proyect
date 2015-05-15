@@ -23,11 +23,11 @@
 				<div class="large-4 small-6 columns"><a href="cambios.php"><img class="icono3"src="../static/icons/actualizar.png"/>
 					<a><h6 class="panel" align ="center">Cambios</h6></a>
 				</div> 
-				<div class="large-4 small-6 columns"><a href="reclamos.php"><img src="../static/icons/eliminar.png"/>
-					<a><h6 class="panel" align ="center">Reclamos</h6></a>
-				</div>    
 				<div class="large-4 small-6 columns"><a href="ingresoresepcion.php"><img class="icono3" src="../static/icons/insertar.png"/>
 					<a><h6 class="panel" align ="center">Recepción</h6></a> 
+				</div>    
+				<div class="large-4 small-6 columns"><a href="Reportes.php"><img class="icono3" src="../static/icons/calendar.png"/>
+					<a><h6 class="panel" align ="center">Reportes</h6></a> 
 				</div>
 			</div>	
 		</div>	

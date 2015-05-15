@@ -53,7 +53,7 @@ body {
   font-size: 100%; }
 
 body {
-  background: white;
+  background: #F6F5F5;
   color: #222222;
   padding: 0;
   margin: 0;
@@ -2721,14 +2721,14 @@ meta.foundation-mq-topbar {
   border-color: #d8d8d8;
   margin-bottom: 1.25rem;
   padding: 1.25rem;
-  background: #f2f2f2;
-  color: #333333; }
+  background: #585858;
+  color: white; }
   .panel > :first-child {
     margin-top: 0; }
   .panel > :last-child {
     margin-bottom: 0; }
   .panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6, .panel p, .panel li, .panel dl {
-    color: #333333; }
+    color: white; }
   .panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6 {
     line-height: 1;
     margin-bottom: 0.625rem; }
@@ -5330,7 +5330,7 @@ table {
     padding: 0.5625rem 0.625rem;
     font-size: 0.875rem;
     color: #222222;
-    text-align: left; }
+    text-align: right; }
   table tr.even, table tr.alt, table tr:nth-of-type(even) {
     background: #f9f9f9; }
   table thead tr th,

@@ -1,8 +1,8 @@
 <?php 
 	include('../config/db.php');
 	$conn=get_db_conn();
-	//$titulo2 = "Recepción"; //Titulo que va a ir en el cuerpo del documento
-	//include("../base/titulo.php"); /* $titulo2 debe estar antes de include() */
+	
+	@include("../base/titulo.php"); /* $titulo2 debe estar antes de include() */
 	//ACA SE SELECCIONAN TODOS LOS DATOS DE LA TABLA
 	$consulta="SELECT * from recepcion ";
 	$datos=mysql_query($consulta,$conn);
@@ -96,9 +96,7 @@ $(document).ready(function() {
 			<div id="demo"></div>
 
 	</div>
-	<div align="center">
-		        <input type="submit" class='button' name="button" id="button" value="Insertar nuevo cobro"  onclick="top.location.href='../ingresoresepcion.php' "  />
-	</div>
+	
 
 </body>
 </html>

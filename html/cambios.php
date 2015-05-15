@@ -23,12 +23,12 @@
   </div>
   <div class="row">
     <div class="large-6 columns">
-      <div class="panel"><a href="porteria_in.php"><img src="../static/icons/in.png"/></a>
-      </div><a href="porteria_in.php" class="button expand" class="large-6 columns">Entrada</a><br/>
+      <div class="panel"><a href="Porteria_fac_in.php"><img src="../static/icons/in.png"/></a>
+      </div><br/>
     </div>
     <div class="large-6 columns">
       <div class="panel"><a href="porteria_out.php"><img src="../static/icons/out.png"/></a>
-      </div><a href="porteria_out.php" class="button expand">Salida</a><br/>
+      </div><br/>
     </div>
   </div>
   <footer class="row">

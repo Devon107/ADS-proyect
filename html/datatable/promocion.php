@@ -82,9 +82,9 @@ $(document).ready(function() {
 	</script>
 </head>
 <body>
-	<div class="container">
-			<div id="demo"></div>
-	</div>
+<form action="promocionPDF.php" method="POST">
+<table><tr><td><div align="center"><input type="submit" class='button' name="button" id="button" value="Generar PDF"/></td></tr></table></form>
+	<div class="container"><div id="demo"></div></div>
 	<div align="center">
 		        <input type="submit" class='button' name="button" id="button" value="Insertar nueva promocion"  onclick="top.location.href='../IngresoPromociones.php' "  />
 	</div>

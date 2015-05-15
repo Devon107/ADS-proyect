@@ -2,6 +2,7 @@
 $titulo2 = "Historial de Cobros"; //Titulo que va a ir en el cuerpo del documento
 		include("../base/titulo.php"); /* $titulo2 debe estar antes de include() */
 	include('../config/db.php');
+
 	$conn=get_db_conn();
 	//ACA SE SELECCIONAN TODOS LOS DATOS DE LA TABLA
 	$consulta="SELECT fechapago, monto, telefono, nombre from historial";
@@ -79,7 +80,8 @@ $(document).ready(function() {
 } );
 	</script>
 </head>
-<body>
+<body><form action="hisCobroPDF.php" method="POST">
+<table><tr><td><div align="center"><input type="submit" class='button' name="button" id="button" value="Generar PDF"/></td></tr></table></form>
 	<div class="container">
 			<div id="demo"></div>
 	</div>

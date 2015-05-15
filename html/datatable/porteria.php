@@ -24,8 +24,8 @@
 			//"<a href=\"uploads/" . $row['DocFile'] . " </a>";
 			//$row['link'] ='h'; 
             $rawdata[$i] = $row;
-			$h=  $row['link'] ='<a href="../bitacora_cin.php?DUI='.$row[0].'" target="_top" >'."Actualizar".'</a>'; 
-            $g=  $row['link2'] ='<a href="../bitacora_cin.php?DUI='.$row[0].'" target="_top" >'."Elimanar".'</a>'; 
+			$h=  $row['link'] ='<a href="../bitacora_cin.php?DUI='.$row[0]; 
+            $g=  $row['link2'] ='<a href="../bitacora_cin.php?DUI='.$row[0]; 
             array_push($rawdata[$i], $h); 
 			array_push($rawdata[$i], $g); 
 			
@@ -71,8 +71,6 @@ $(document).ready(function() {
 			{ "title": "Color", "class": "center" },
 			{ "title": "Talla", "class": "center" },
 			{ "title": "Fecha", "class": "center" },
-			{ "title": "Actualizar", "class": "center" },
-			{ "title": "Eliminar"}
 		]
 	} );	
 } );

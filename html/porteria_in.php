@@ -11,12 +11,29 @@
 	include ('../html/base/header.php');
 	include('./config/db.php');
 	$conn=get_db_conn();
-	$sql="SELECT estilo from producto";
-	$consulta=mysql_query($sql,$conn);
+	$idFactura = -1;
+	if (isset($_GET['factura']))
+	{
+		$factura = $_GET['factura'];
+	}
+
+
+	$qr = "select f.idfactura,f.idestilo,p.nombre as estilo ,c.nombre as color,t.talla, concat(Primer_Nombre, ' ', Segundo_Nombre,' ', Primer_Apellido,' 
+		', Segundo_Apellido) as nombre from factura as f     inner join producto as p on p.estilo=f.idestilo
+		 inner join color as c on c.idcolor = f.idcolor inner join talla as t on t.idtalla = f.idtalla inner join cliente as cli on
+		 cli.idCliente = f.idcliente inner join persona as per on per.idPersona = cli.idPersona where f.idfactura=" . $factura;
+	$consulta=mysql_query($qr,$conn);
+	$rs = mysql_fetch_assoc($consulta);
+/*
 	$sql1="SELECT nombre from color";
 	$consulta1=mysql_query($sql1,$conn);
 	$sql2="SELECT talla from talla";
 	$consulta2=mysql_query($sql2,$conn);
+	$sql3="SELECT idfactura from factura";
+	$consulta3=mysql_query($sql3,$conn);
+
+	$sql="SELECT idestilo from factura where factura = '$consulta3'";
+	$consulta=mysql_query($sql,$conn);*/
 	?>
 </head>
 <body>
@@ -36,24 +53,16 @@
 					<div>
 						<form method="post" action="insercion.php">
 							<div class="large-6 columns">
-								<a>Factura: </a><input title="Ingrese una Factura Valida" type="number" name="Facturas" min="1" value="1" placeholder="Busqueda de Facturas" required/>
-								<a>Producto: </a><select name="Producto">
-								<?php while($row = mysql_fetch_assoc($consulta)){
-									?><option><?php echo $row['estilo'];
-								}?>
-							</option>
-						</select>
+
+								<a>Factura:</a><input  type="number" name="Facturas" value="<?php echo $rs['idfactura']; ?>" placeholder="Busqueda de Facturas" required readonly />
+							    <a>Estilo:</a><input   type="text" name="estilo" value="<?php echo $rs['estilo']; ?>"  required readonly />
+								<input type="hidden" name="Producto" value="<?php echo $rs['idestilo']; ?>" />
+
 					</div>
 					<div class="large-6 columns">
-						<a>Color: </a><select name="color">
-						<?php while($row = mysql_fetch_assoc($consulta1)){
-							?><option><?php echo $row['nombre'];
-						}?>
-					</option>
-				</select><a>Talla: </a><select name="talla">
-				<?php while($row = mysql_fetch_assoc($consulta2)){
-					?><option><?php echo $row['talla'];
-				}?>
+						 <a>Color:</a><input   type="text" name="color" value="<?php echo $rs['color']; ?>"  required readonly />
+						 <a>Talla:</a><input   type="number" name="talla" value="<?php echo $rs['talla']; ?>"  required readonly />
+
 			</option>
 		</select></div>
 	</div>
@@ -89,10 +98,14 @@
 			<div class="large-6 columns">
 				<div class="panel"><a href="#"><img src="../static/icons/productoregistrado.png"/></a>
 				</div><input class="button expand" type="submit" value="Aceptar">
+				
 			</div>
 			<div class="large-6 columns">
-				<div class="panel"><a href="#"><img src="../static/icons/productoleido.png"/></a>
-				</div><a href="porteria.php" class="button expand" class="button expand">Cancelar</a>  
+				<div class="panel">
+					<a href="producto_leido.php?idfactura=<?php echo $rs['idfactura']; ?>"><img src="../static/icons/productoleido.png"/></a>
+				</div>
+
+				<a href="porteria.php" class="button expand" class="button expand">Cancelar</a>  
 			</form>
 		</div>
 	</div>

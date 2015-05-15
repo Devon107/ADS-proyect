@@ -9,6 +9,8 @@ if($mysqli->connect_errno){
 
 $Facturas = $_POST['Facturas'];  // nombre es lo que se establece en la propiedad "name" del input del formulario
 $Productos = $_POST['Producto'];  // nombre es lo que se establece en la propiedad "name" del input del formulario
+echo $Productos;
+
 $Color = $_POST['color'];  // nombre es lo que se establece en la propiedad "name" del input del formulario
 $Talla = $_POST['talla'];  // nombre es lo que se establece en la propiedad "name" del input del formulario
 $Fecha = date("Y-m-d");  
@@ -27,6 +29,6 @@ $query = "INSERT INTO porteria_ce(factura_in,producto_in,id_color,id_talla,fecha
 ?> <script>alert("");</script> <?php
 $mysqli->query($query);
 
-header("Location: porteria_in.php"); // redirecciona
+header("Location: cambios.php"); // redirecciona
 
 ?>

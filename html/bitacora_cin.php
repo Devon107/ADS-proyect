@@ -47,10 +47,6 @@
   ?>
   <div>
   <iframe src="../html/datatable/porteria.php" frameborder="0" width="1000" height="500"></iframe>
-    <?php
-      
-      include ('../html/datatable/porteria.php')
-    ?>
   </div>
   <footer class="row">
     <?php

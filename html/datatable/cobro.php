@@ -1,10 +1,12 @@
 <?php 
 	include('../config/db.php');
+	
 	$conn=get_db_conn();
 	$titulo2 = "Reporte de cobros"; //Titulo que va a ir en el cuerpo del documento
 		include("../base/titulo.php"); /* $titulo2 debe estar antes de include() */
 	//ACA SE SELECCIONAN TODOS LOS DATOS DE LA TABLA
 	$consulta="SELECT CONCAT(persona.Primer_Nombre, ' ', persona.Primer_Apellido),DUI,Monto,Fecha,Telefono,IF(Cobro.estado=1,'Pendiente','Cancelado') as est FROM persona INNER JOIN Cobro ON Persona.idPersona= cobro.idPersona";
+	
 	$datos=mysql_query($consulta,$conn);
 
 	$resultado = mysql_query($consulta);
@@ -106,10 +108,10 @@ $(document).ready(function() {
 </head>
 
 <body>
+<form action="cobroPDF.php" method="POST">
+	<table><tr><td><div align="center"><input type="submit" class='button' name="button" id="button" value="Generar PDF"/></td></tr></table></form>
 	<div class="container">
-
 			<div id="demo"></div>
-
 	</div>
 	<div align="center">
 		        <input type="submit" class='button' name="button" id="button" value="Insertar nuevo cobro"  onclick="top.location.href='../IngresoCobros.php' "  />

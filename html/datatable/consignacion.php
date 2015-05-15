@@ -2,6 +2,7 @@
 $titulo2 = "Reporte de consignaciones"; //Titulo que va a ir en el cuerpo del documento
 		include("../base/titulo.php"); /* $titulo2 debe estar antes de include() */
 	include('../config/db.php');
+	
 	$conn=get_db_conn();
 	//ACA SE SELECCIONAN TODOS LOS DATOS DE LA TABLA
 	$consulta="SELECT CONCAT(consignacion.PrimerNombre, ' ', consignacion.PrimerApellido),Referencia, Telefono, direccion, Concepto, valor, pay from consignacion";
@@ -34,6 +35,26 @@ $titulo2 = "Reporte de consignaciones"; //Titulo que va a ir en el cuerpo del do
 		$j++;
 	}
 	$i=0;
+	$consulta2="SELECT IF(consignacion.estado=1,'Activo','Inactivo') from consignacion";
+	$resultado2 = mysql_query($consulta2);
+	if (!$resultado2) {
+		echo "No se pudo ejecutar con exito la consulta ($consulta) en la BD: " . mysql_error();
+		exit;
+	}
+	if (mysql_num_rows($resultado1) == 0) {
+		echo "No se han encontrado registros.";
+		exit;
+	}
+	$arrayLength = count($resultado2);
+	$j=0;
+	while($row2 = mysql_fetch_array($resultado2))
+	{
+		$est[$j]=$row2[0];
+		$j++;
+	}
+
+	
+	
 	  while($row = mysql_fetch_array($resultado))
         {   
             //guardamos en rawdata todos los vectores/filas que nos devuelve la consulta
@@ -42,7 +63,7 @@ $titulo2 = "Reporte de consignaciones"; //Titulo que va a ir en el cuerpo del do
         
             $rawdata[$i] = $row;
 			$h=$row['link'] ='<a href="../ActualizacionConsignaciones.php?DUI='.$id[$i].'" target="_top" >'."Actualizar".'</a>'; 
-			$g=$row['link2'] ='<a href="../ActualizacionConsignaciones.php?DUI='.$id[$i].'" target="_top" >'."Eliminar".'</a>';
+			$g=$row['link2'] ='<a href="auxiliar.php?ID='.$id[$i].'" target="_top" >'."$est[$i]".'</a>';
             array_push($rawdata[$i], $h);
             array_push($rawdata[$i], $g);				
 			$i++;
@@ -83,13 +104,15 @@ $(document).ready(function() {
 			{ "title": "Pago", "class": "center" },
 			{ "title": "Editar", "class": "center" },
 			
-			{ "title": "Eliminar", "class": "center" }
+			{ "title": "Estado", "class": "center" }
 		]
 	} );	
 } );
 	</script>
 </head>
 <body>
+<form action="consignacionPDF.php" method="POST">
+<table><tr><td><div align="center"><input type="submit" class='button' name="button" id="button" value="Generar PDF"/></td></tr></table></form>
 	<div class="container">
 			<div id="demo"></div>
 	</div>
